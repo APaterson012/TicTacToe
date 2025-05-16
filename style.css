@@ -1,0 +1,144 @@
+/* style.css */
+
+/* Reset & Variables */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --board-size: 320px;
+  --gap: 8px;
+  --bg-dark: #111;
+  --bg-light: #f7f7f7;
+  --x-color: #e74c3c;
+  --o-color: #3498db;
+  --accent: #2ecc71;
+  --modal-bg: rgba(0, 0, 0, 0.6);
+  --font: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Animated Gradient Background */
+body {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #2c3e50, #4ca1af, #34495e, #1abc9c);
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+  user-select: none;
+}
+
+@keyframes gradientBG {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* Game Title */
+.game-title {
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  margin-bottom: 1rem;
+  animation: titlePop 1s ease-out both;
+}
+
+@keyframes titlePop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+/* Game Wrapper */
+.game-wrapper {
+  position: relative;
+  width: var(--board-size);
+}
+
+/* Grid Board */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  background: #222;
+  padding: var(--gap);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+/* Cells */
+.cell {
+  background: var(--bg-light);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.cell:hover {
+  background: #ececec;
+}
+.cell:active {
+  transform: scale(0.95);
+}
+
+/* X & O colors */
+.cell.x { color: var(--x-color); }
+.cell.o { color: var(--o-color); }
+
+/* Modal Overlay */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--modal-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.hidden {
+  display: none;
+}
+
+/* Modal Content */
+.modal {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.modal-text {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.btn.replay {
+  background: var(--accent);
+  color: #fff;
+}
+.btn.replay:hover {
+  transform: scale(1.05);
+}
+.btn.replay:active {
+  transform: scale(0.95);
+}
